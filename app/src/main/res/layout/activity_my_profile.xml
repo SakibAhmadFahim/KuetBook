@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_6"
+    tools:context=".MyProfile">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout1">
+
+
+
+        <LinearLayout
+
+
+            android:id="@+id/abc2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/academicname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title2"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="25dp"
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="Academic Name"
+                android:inputType="text"
+                android:paddingVertical="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/roll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/academicname"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawablePadding="20dp"
+
+
+                android:fontFamily="@font/calibri"
+                android:hint="Roll No."
+                android:inputType="number"
+                android:paddingVertical="10dp"
+                android:paddingLeft="50dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dept"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/roll"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawablePadding="20dp"
+
+
+                android:fontFamily="@font/calibri"
+                android:hint="Department"
+                android:inputType="number"
+                android:paddingVertical="10dp"
+                android:paddingLeft="50dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/hall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dept"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawablePadding="20dp"
+
+
+                android:fontFamily="@font/calibri"
+                android:hint="Hall"
+                android:inputType="number"
+                android:paddingVertical="10dp"
+                android:paddingLeft="50dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/hometown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/roll"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_home_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="Home Town"
+                android:inputType="text"
+                android:paddingVertical="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/college"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hometown"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_school_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="College"
+                android:inputType="text"
+                android:paddingVertical="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/college"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+                android:drawablePadding="20dp"
+
+
+                android:fontFamily="@font/calibri"
+                android:hint="Date of Birth"
+                android:inputType="text"
+                android:paddingVertical="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/birthday"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_bloodtype_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="Blood Group"
+                android:inputType="text"
+                android:paddingVertical="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bg"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_phone_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="Mobile No."
+                android:inputType="number"
+                android:paddingVertical="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/abc2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/design_default_color_secondary"
+            android:fontFamily="@font/calibri"
+            android:padding="10dp"
+            android:text="Next"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+
+        android:id="@+id/layout2">
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/abc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mobile"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="KUET Email"
+                android:inputType="textEmailAddress"
+                android:paddingVertical="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email"
+                android:paddingLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_info_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="Password"
+                android:includeFontPadding="true"
+                android:inputType="textPassword"
+                android:paddingVertical="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/confirmpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pass"
+                android:paddingLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="15dp"
+                android:background="#30ffffff"
+                android:drawableLeft="@drawable/ic_baseline_info_24"
+                android:drawablePadding="20dp"
+                android:fontFamily="@font/calibri"
+                android:hint="Confirm Password"
+                android:includeFontPadding="true"
+                android:inputType="textPassword"
+                android:paddingVertical="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/abc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="35dp"
+            android:backgroundTint="@color/design_default_color_secondary"
+            android:fontFamily="@font/calibri"
+            android:padding="10dp"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="24dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

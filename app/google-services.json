@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "790245200794",
+    "firebase_url": "https://kuet-9241c-default-rtdb.firebaseio.com",
+    "project_id": "kuet-9241c",
+    "storage_bucket": "kuet-9241c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790245200794:android:01a6deb8a3563191b32023",
+        "android_client_info": {
+          "package_name": "com.example.kuet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790245200794-16ko463pt2ikgsr0187gej2jr5olj66v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kuet",
+            "certificate_hash": "d9ee0e0d95d2dbc1eff0ac1ca9bc0c395523ee86"
+          }
+        },
+        {
+          "client_id": "790245200794-s5nnfbjjq8ralpe7m2e6vkgrjv61its8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDibeDa_hRNfp9m1A_cOrpAmWR2QBpMgXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790245200794-s5nnfbjjq8ralpe7m2e6vkgrjv61its8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

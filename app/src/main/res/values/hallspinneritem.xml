@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="hall">
+
+        <item>Fazlul Haque Hall</item>
+        <item>Lalan Shah Hall</item>
+        <item>Khan Jahan Ali Hall</item>
+        <item>Dr. M.A. Rashid Hall</item>
+        <item>Rokeya Hall</item>
+        <item>Amar Ekushey Hall</item>
+        <item>Bangabandhu Sheikh Mujibur Rahman Hall</item>
+
+    </string-array>
+</resources>

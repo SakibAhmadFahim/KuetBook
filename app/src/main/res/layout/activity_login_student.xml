@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/gradient_3"
+    tools:context=".LoginStudent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutlogin">
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/login"/>
+
+
+
+
+
+
+    <EditText
+        android:id="@+id/tmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="25dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_email_24"
+        android:drawablePadding="20dp"
+        android:fontFamily="@font/calibri"
+        android:hint="Email"
+        android:includeFontPadding="true"
+        android:inputType="textEmailAddress"
+        android:minHeight="55dp"
+        android:paddingLeft="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
+
+
+    <EditText
+        android:id="@+id/tpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tmail"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="15dp"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/ic_baseline_info_24"
+        android:drawablePadding="20dp"
+        android:fontFamily="@font/calibri"
+        android:hint="Password"
+        android:includeFontPadding="true"
+        android:inputType="textPassword"
+        android:minHeight="55dp"
+        android:paddingLeft="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp" />
+
+
+        <ImageView
+            android:id="@+id/imageview_logo"
+            android:layout_width="32dp"
+            android:layout_height="29dp"
+            android:layout_alignStart="@+id/tpass"
+            android:layout_alignTop="@+id/tpass"
+            android:layout_alignEnd="@+id/tpass"
+            android:layout_alignBottom="@+id/tpass"
+            android:layout_marginLeft="300dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginRight="10dp"/>
+
+        <CheckBox
+        android:id="@+id/rembrme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tpass"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/calibri"
+        android:minHeight="48dp"
+        android:paddingLeft="5dp"
+        android:text="Remember me"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#0B0004"
+        android:textColorLink="#2F6A65"
+        android:textSize="16dp" />
+</RelativeLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutlogin"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:fontFamily="@font/calibri"
+        android:padding="10dp"
+        android:text="LOG IN"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutgoogle"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? "
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/signin"
+
+        android:gravity="center"
+        android:id="@+id/layoutgoogle"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.gms.common.SignInButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/google"
+            android:visibility="gone">
+
+        </com.google.android.gms.common.SignInButton>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

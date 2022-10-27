@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/gradient_3"
+    tools:context=".LoginInAs">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+
+        android:textStyle="italic|bold"
+        android:paddingBottom="50dp"
+        android:paddingHorizontal="10dp"
+        android:textSize="30sp"
+        android:text="Welcome To KUETBook"
+
+        android:id="@+id/txtkuet"/>
+
+
+
+    <Button
+        android:id="@+id/signinasstudent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/txtkuet"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:fontFamily="@font/calibri"
+        android:padding="10dp"
+        android:text="LOG IN AS STUDENT"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+    <Button
+        android:id="@+id/signinasteacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signinasstudent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:fontFamily="@font/calibri"
+        android:padding="10dp"
+        android:text="LOG IN AS TEACHER"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+
+
+
+
+
+
+</RelativeLayout>

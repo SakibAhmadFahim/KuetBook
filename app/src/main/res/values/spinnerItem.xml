@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="departments">
+
+        <item>EEE</item>
+        <item>CSE</item>
+        <item>ECE</item>
+        <item>BME</item>
+        <item>MSE</item>
+        <item>ME</item>
+        <item>IEM</item>
+        <item>ESE</item>
+        <item>LE</item>
+        <item>TE</item>
+        <item>ChE</item>
+        <item>MTE</item>
+        <item>CE</item>
+        <item>URP</item>
+        <item>BECM</item>
+        <item>Arch.</item>
+    </string-array>
+</resources>
