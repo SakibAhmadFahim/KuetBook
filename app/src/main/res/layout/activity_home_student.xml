@@ -408,7 +408,7 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp">
                 <LinearLayout
-                    android:id="@+id/Notes"
+                    android:id="@+id/courses"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -421,7 +421,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Courses"
+                        android:text="Course"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#000000"

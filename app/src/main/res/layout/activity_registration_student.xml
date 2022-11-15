@@ -43,7 +43,7 @@
             android:drawableLeft="@drawable/ic_baseline_person_outline_24"
             android:drawablePadding="20dp"
             android:fontFamily="@font/calibri"
-            android:hint="Academic Name"
+            android:hint="Name"
             android:paddingVertical="10dp"
             android:paddingLeft="10dp"
             android:inputType="text"
@@ -68,7 +68,7 @@
             android:fontFamily="@font/calibri"
             android:hint="Roll No."
             android:inputType="number"
-            android:paddingLeft="50dp"
+            android:paddingLeft="55dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="20sp" />
@@ -107,7 +107,7 @@
             android:drawableLeft="@drawable/ic_baseline_home_24"
             android:drawablePadding="20dp"
             android:fontFamily="@font/calibri"
-            android:hint="Home Town"
+            android:hint="Home"
             android:inputType="text"
             android:paddingVertical="10dp"
             android:paddingLeft="10dp"
@@ -134,7 +134,7 @@
             android:textColorHint="@color/white"
             android:textSize="20sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/birthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

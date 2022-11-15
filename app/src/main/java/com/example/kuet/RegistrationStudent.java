@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -31,6 +30,9 @@ import java.util.regex.Pattern;
 
 public class RegistrationStudent extends AppCompatActivity {
 
+    private static final String TAG="RegistrationStudent";
+
+   // DatabaseHelper mDatabaseHelper;
     ProgressBar progressBar;
     RelativeLayout layout1,layout2;
     private DatePickerDialog picker;
@@ -79,7 +81,7 @@ public class RegistrationStudent extends AppCompatActivity {
         final EditText Roll=findViewById(R.id.roll);
         final EditText Home = findViewById(R.id.hometown);
         final EditText College = findViewById(R.id.college);
-        final EditText DOB = findViewById(R.id.birthday);
+        final TextView DOB = findViewById(R.id.birthday);
         final EditText BG = findViewById(R.id.bg);
         final EditText Mobile = findViewById(R.id.mobile);
         final EditText Email = findViewById(R.id.email);
@@ -88,6 +90,7 @@ public class RegistrationStudent extends AppCompatActivity {
         final MaterialButton Register = findViewById(R.id.register);
         final TextView signin=findViewById(R.id.signin);
         final TextView login = findViewById(R.id.login);
+       // mDatabaseHelper=new DatabaseHelper(this);
 
         DOB.setOnClickListener(v -> {
             final Calendar calendar = Calendar.getInstance();
@@ -95,13 +98,7 @@ public class RegistrationStudent extends AppCompatActivity {
             int month = calendar.get(Calendar.MONTH);
             int year =calendar.get(Calendar.YEAR);
 
-            picker = new DatePickerDialog(RegistrationStudent.this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    DOB.setText((dayOfMonth + "/" + (month + 1) + "/" +year));
-
-                }
-            },year,month,day);
+            picker = new DatePickerDialog(RegistrationStudent.this, (view, year1, month1, dayOfMonth) -> DOB.setText((dayOfMonth + "/" + (month1 + 1) + "/" + year1)),year,month,day);
             picker.show();
         });
 
@@ -117,21 +114,42 @@ public class RegistrationStudent extends AppCompatActivity {
             final String txtCollege=College.getText().toString();
             final String txtdoB=DOB.getText().toString();
             final String txtBG=BG.getText().toString();
-            final String txtEmail=Email.getText().toString();
-            final String txtDepartment=spinner.getSelectedItem().toString();
-            final String txtHall = spinner2.getSelectedItem().toString();
 
-
-            String mobileRegex="[0][1][0-9]{9}";
+            String mobileRegex="^$|([0][1][0-9]{9})";
             Matcher mobileMatcher;
             Pattern mobilePattern = Pattern.compile(mobileRegex);
             mobileMatcher = mobilePattern.matcher(txtMobile);
 
-            if(!mobileMatcher.find()){
+            String name="^[a-zA-Z\\s]+";
+            Matcher nameMatcher;
+            Pattern namePattern = Pattern.compile(name);
+            nameMatcher = namePattern.matcher(txtName);
+
+            String roll="[0-9]{7}";
+            Matcher rollMatcher;
+            Pattern rollPattern = Pattern.compile(roll);
+            rollMatcher = rollPattern.matcher(txtRoll);
+
+            if(!nameMatcher.find()){
+                Name.setError("Name is not Valid!!");
+                Name.requestFocus();
+            }
+           else if(!rollMatcher.find()){
+                Roll.setError("Roll Number is not Valid!!");
+                Roll.requestFocus();
+           }
+            else if(!mobileMatcher.find()){
                 //Toast.makeText(Registration.this,"Password not matched",Toast.LENGTH_SHORT).show();
                 Mobile.setError("Mobile No. is not Valid!!");
                 Mobile.requestFocus();
             }
+
+/*
+
+            else if(PasswordTxt.isEmpty()){
+                Toast.makeText(LoginStudent.this,"Please enter your password",Toast.LENGTH_SHORT).show();
+            }
+*/
 
             else {
                 layout1.setVisibility(View.GONE);
@@ -149,6 +167,7 @@ public class RegistrationStudent extends AppCompatActivity {
             Intent myIntent = new Intent(RegistrationStudent.this, LoginStudent.class);
             //myIntent.putExtra("key", value); //Optional parameters
             RegistrationStudent.this.startActivity(myIntent);
+            finish();
         });
 
         login.setOnClickListener(view -> {
@@ -218,9 +237,10 @@ public class RegistrationStudent extends AppCompatActivity {
                         referenceProfile.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(task1 -> {
                             if(task1.isSuccessful()){
                                 // Send verification Email
-                            firebaseUser.sendEmailVerification();
-                            Toast.makeText(RegistrationStudent.this, "User registered successfully. Please verify your Email.", Toast.LENGTH_LONG).show();
-                            mAuth.signOut();
+                                firebaseUser.sendEmailVerification();
+                                mAuth.signOut();
+                                 Toast.makeText(RegistrationStudent.this, "User registered successfully. Please verify your Email.", Toast.LENGTH_LONG).show();
+
                             Intent intent=new Intent(RegistrationStudent.this, LoginStudent.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
@@ -228,7 +248,7 @@ public class RegistrationStudent extends AppCompatActivity {
                         }else{
                                 Toast.makeText(RegistrationStudent.this, "User registered failed. Please try again.", Toast.LENGTH_LONG).show();
                             }
-                            progressBar.setVisibility(View.GONE);
+                          /*  progressBar.setVisibility(View.GONE);*/
                         });
 
                     }else {

@@ -38,10 +38,7 @@ public class CSE extends AppCompatActivity {
 
 class CustomWebViewClientaehCSE extends WebViewClient {
 
-    private Activity activity;
-
     public CustomWebViewClientaehCSE(Activity activity){
-        this.activity=activity;
     }
 
     ///API Level less than 24

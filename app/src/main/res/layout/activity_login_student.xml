@@ -114,14 +114,41 @@
         android:textColor="@color/white"
         android:textSize="16sp" />
 
+    <LinearLayout
+        android:id="@+id/forgotpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signin"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password? "
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/recover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recover"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutgoogle"
+        android:layout_below="@+id/google"
         android:gravity="center"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -138,23 +165,18 @@
             android:textStyle="bold|italic" />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_below="@+id/signin"
 
-        android:gravity="center"
-        android:id="@+id/layoutgoogle"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <com.google.android.gms.common.SignInButton
+            android:id="@+id/google"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:id="@+id/google"
-            android:visibility="gone">
-
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/forgotpassword"
+            android:layout_marginTop="20dp">
         </com.google.android.gms.common.SignInButton>
-    </LinearLayout>
+
 
 
 

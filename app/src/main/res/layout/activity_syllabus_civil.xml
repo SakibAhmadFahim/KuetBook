@@ -3,13 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_1"
-    tools:context=".SplashActivity">
-
-   <ImageView
-       android:layout_width="200dp"
-       android:layout_height="200dp"
-       android:src="@drawable/kuet"
-       android:layout_centerInParent="true"/>
+    tools:context=".SyllabusCivil">
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

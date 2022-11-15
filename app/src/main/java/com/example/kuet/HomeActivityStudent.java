@@ -2,7 +2,13 @@ package com.example.kuet;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -14,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,10 +37,28 @@ public class HomeActivityStudent extends AppCompatActivity {
     GoogleSignInClient gsc;
 
 
-    LinearLayout calculator,about,contact,hall,automation,website,teacher,academic,signout,bus,library,department,myprofile;
+    LinearLayout calculator,about,schedule,contact,hall,automation,website,teacher,academic,signout,bus,library,department,Courses,myprofile;
     ImageView profile;
-    String txtDepartment,txtHall;
-    TextView Name,Roll,Department;
+    String txtDepartment,txtHall,txtName,txtRoll,txtDepartmentRoll;
+    TextView Name,Department;
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Closing Activity")
+                .setMessage("Do you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,17 +77,18 @@ public class HomeActivityStudent extends AppCompatActivity {
         myRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String txtName = snapshot.child("Name").getValue(String.class);
-                String txtRoll = snapshot.child("Roll").getValue(String.class);
-                txtDepartment = snapshot.child("Department").getValue(String.class) +" 2K"+ txtRoll.charAt(0)+txtRoll.charAt(1);
+                txtName = snapshot.child("Name").getValue(String.class);
+                txtRoll = snapshot.child("Roll").getValue(String.class);
+                txtDepartment = snapshot.child("Department").getValue(String.class);
                 txtHall = snapshot.child("Hall").getValue(String.class);
+                txtDepartmentRoll = txtDepartment +" 2K"+ txtRoll.charAt(0)+txtRoll.charAt(1);
 
 
                 // Log.d(TAG, "Value is: " + value);
 
                 Name.setText(txtName);
                 //Roll.setText(" 2K"+txtRoll);
-                Department.setText(txtDepartment);
+                Department.setText(txtDepartmentRoll);
 
             }
 
@@ -75,15 +99,18 @@ public class HomeActivityStudent extends AppCompatActivity {
             }
         });
 
+
+
+
+
         gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc= GoogleSignIn.getClient(this,gso);
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+       /* GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
 
         }
-
-
+*/
         // initialize profile
         // with method findViewById()
         profile = findViewById(R.id.profile);
@@ -95,6 +122,18 @@ public class HomeActivityStudent extends AppCompatActivity {
             // it's object named intent.
             // SecondActivity is the name of new created EmptyActivity.
             Intent intent = new Intent(HomeActivityStudent.this, Profile.class);
+            startActivity(intent);
+        });
+
+        schedule = findViewById(R.id.Schedule);
+
+        // Apply OnClickListener  to imageView to
+        // switch from one activity to another
+       schedule.setOnClickListener(v -> {
+            // Intent class will help to go to next activity using
+            // it's object named intent.
+            // SecondActivity is the name of new created EmptyActivity.
+            Intent intent = new Intent(HomeActivityStudent.this,Schedule.class);
             startActivity(intent);
         });
         automation = findViewById(R.id.automation);
@@ -136,14 +175,168 @@ public class HomeActivityStudent extends AppCompatActivity {
         // Apply OnClickListener  to imageView to
         // switch from one activity to another
         department.setOnClickListener(v -> {
+            if(isNetworkAvailable() ||txtDepartment==null)
+            {
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Internet Connection Alert")
+                        .setMessage("Please Check Your Internet Connection")
+                         .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                          .create().show();
+
+            }
+            else{
 
             // Intent class will help to go to next activity using
             // it's object named intent.
             // SecondActivity is the name of new created EmptyActivity.
-            Intent intent = new Intent(HomeActivityStudent.this, Department.class);
-            startActivity(intent);
-        });
+            if(Objects.equals(txtDepartment, "EEE")){
+                Intent intent = new Intent(HomeActivityStudent.this, EEE.class);
+                startActivity(intent);
+            }
 
+            else if(Objects.equals(txtDepartment, "CSE")){
+                Intent intent = new Intent(HomeActivityStudent.this, CSE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ECE")){
+                Intent intent = new Intent(HomeActivityStudent.this, ECE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "BME")){
+                Intent intent = new Intent(HomeActivityStudent.this, BME.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "MSE")){
+                Intent intent = new Intent(HomeActivityStudent.this, MSE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ME")){
+                Intent intent = new Intent(HomeActivityStudent.this, ME.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "IEM")){
+                Intent intent = new Intent(HomeActivityStudent.this, IEM.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ESE")){
+                Intent intent = new Intent(HomeActivityStudent.this, ESE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "LE")){
+                Intent intent = new Intent(HomeActivityStudent.this, LE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "TE")){
+                Intent intent = new Intent(HomeActivityStudent.this, TE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ChE")){
+                Intent intent = new Intent(HomeActivityStudent.this, Chemical.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "MTE")){
+                Intent intent = new Intent(HomeActivityStudent.this, MTE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "CE")){
+                Intent intent = new Intent(HomeActivityStudent.this, Civil.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "URP")){
+                Intent intent = new Intent(HomeActivityStudent.this, URP.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "BECM")){
+                Intent intent = new Intent(HomeActivityStudent.this, BECM.class);
+                startActivity(intent);
+            }
+
+            else if(Objects.equals(txtDepartment, "Arch.")){
+                Intent intent = new Intent(HomeActivityStudent.this, ARCH.class);
+                startActivity(intent);
+            }
+
+            Toast.makeText(this, "Welcome to Department of " + txtDepartment, Toast.LENGTH_SHORT).show();
+        }});
+
+        Courses = findViewById(R.id.courses);
+
+        // Apply OnClickListener  to imageView to
+        // switch from one activity to another
+        Courses.setOnClickListener(v -> {
+
+            // Intent class will help to go to next activity using
+            // it's object named intent.
+            // SecondActivity is the name of new created EmptyActivity.
+            if(Objects.equals(txtDepartment, "EEE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusEEE.class);
+                startActivity(intent);
+            }
+
+            else if(Objects.equals(txtDepartment, "CSE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusCSE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ECE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusECE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "BME")){
+                Intent intent = new Intent(HomeActivityStudent.this,  SyllabusBME.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "MSE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusMSE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ME")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusME.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "IEM")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusIEM.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ESE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusESE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "LE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusLE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "TE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusTE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "ChE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusChemical.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "MTE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusMTE.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "CE")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusCivil.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "URP")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusURP.class);
+                startActivity(intent);
+            }
+            else if(Objects.equals(txtDepartment, "BECM")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusBECM.class);
+                startActivity(intent);
+            }
+
+            else if(Objects.equals(txtDepartment, "Arch.")){
+                Intent intent = new Intent(HomeActivityStudent.this, SyllabusArch.class);
+                startActivity(intent);
+            }
+           // Toast.makeText(this, "Welcome to Department of " + txtDepartment, Toast.LENGTH_SHORT).show();
+        });
         // initialize hall
         // with method findViewById()
         hall = findViewById(R.id.hall);
@@ -151,6 +344,19 @@ public class HomeActivityStudent extends AppCompatActivity {
         // Apply OnClickListener  to imageView to
         // switch from one activity to another
         hall.setOnClickListener(v -> {
+            if(isNetworkAvailable() ||txtHall==null)
+            {
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Internet Connection Alert")
+                        .setMessage("Please Check Your Internet Connection")
+                        .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                        .create().show();
+
+            }
+            else{
+
+
             if(Objects.equals(txtHall, "Bangabandhu Sheikh Mujibur Rahman Hall")){
                 Intent intent = new Intent(HomeActivityStudent.this, BBH.class);
                 startActivity(intent);
@@ -182,7 +388,7 @@ public class HomeActivityStudent extends AppCompatActivity {
             }
             Toast.makeText(this, "Welcome to " + txtHall, Toast.LENGTH_SHORT).show();
 
-        });
+        }});
 
         // initialize library
         // with method findViewById()
@@ -191,12 +397,23 @@ public class HomeActivityStudent extends AppCompatActivity {
         // Apply OnClickListener  to imageView to
         // switch from one activity to another
         library.setOnClickListener(v -> {
+            if(isNetworkAvailable())
+            {
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Internet Connection Alert")
+                        .setMessage("Please Check Your Internet Connection")
+                        .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                        .create().show();
+
+            }
+            else{
             // Intent class will help to go to next activity using
             // it's object named intent.
             // SecondActivity is the name of new created EmptyActivity.
             Intent intent = new Intent(HomeActivityStudent.this, Library.class);
             startActivity(intent);
-        });
+        }});
         calculator = findViewById(R.id.calculator);
 
         // Apply OnClickListener  to imageView to
@@ -238,12 +455,24 @@ public class HomeActivityStudent extends AppCompatActivity {
         // Apply OnClickListener  to imageView to
         // switch from one activity to another
         academic.setOnClickListener(v -> {
+            if(isNetworkAvailable())
+            {
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Internet Connection Alert")
+                        .setMessage("Please Check Your Internet Connection")
+                        .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                        .create().show();
+
+            }
+            else{
+
             // Intent class will help to go to next activity using
             // it's object named intent.
             // SecondActivity is the name of new created EmptyActivity.
             Intent intent = new Intent(HomeActivityStudent.this, AcademicUG.class);
             startActivity(intent);
-        });
+        }});
 
         // initialize bus
         // with method findViewById()
@@ -263,19 +492,31 @@ public class HomeActivityStudent extends AppCompatActivity {
         // with method findViewById()
         website = findViewById(R.id.website);
 
+
         // Apply OnClickListener  to imageView to
         // switch from one activity to another
         website.setOnClickListener(v -> {
-            // Intent class will help to go to next activity using
+            if(isNetworkAvailable())
+            {
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Internet Connection Alert")
+                        .setMessage("Please Check Your Internet Connection")
+                        .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                        .create().show();
+
+            }
+            else{// Intent class will help to go to next activity using
+
             // it's object named intent.
             // SecondActivity is the name of new created EmptyActivity.
             Intent intent = new Intent(HomeActivityStudent.this, Website.class);
             startActivity(intent);
-        });
+        }});
 
         // initialize teacher
         // with method findViewById()
-        teacher = findViewById(R.id.teacher);
+       /* teacher = findViewById(R.id.teacher);
 
         // Apply OnClickListener  to imageView to
         // switch from one activity to another
@@ -285,7 +526,7 @@ public class HomeActivityStudent extends AppCompatActivity {
             // SecondActivity is the name of new created EmptyActivity.
             Intent intent = new Intent(HomeActivityStudent.this, Teacher.class);
             startActivity(intent);
-        });
+        });*/
 
         myprofile = findViewById(R.id.my_profile);
 
@@ -297,12 +538,38 @@ public class HomeActivityStudent extends AppCompatActivity {
             // SecondActivity is the name of new created EmptyActivity.
             Intent intent = new Intent(HomeActivityStudent.this, MyProfile.class);
             startActivity(intent);
+            finish();
         });
     }
 
-    private void signout() {
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-            FirebaseAuth.getInstance().signOut();
+        if (connectivityManager != null) {
+
+
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+
+                        return false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+
+                        return false;
+                    } else return !capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
+                }
+            }
+        }
+
+        return true;
+
+    }
+
+
+    private void signout() {
+            FirebaseAuth mAuth=FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent =new Intent(HomeActivityStudent.this, LoginStudent.class);
             intent.addFlags((Intent.FLAG_ACTIVITY_NEW_TASK) | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -310,3 +577,4 @@ public class HomeActivityStudent extends AppCompatActivity {
     }
 
 }
+

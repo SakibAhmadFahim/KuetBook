@@ -10,6 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.kuet.R;
+
 public class AEH extends AppCompatActivity {
 
     private WebView webView;
