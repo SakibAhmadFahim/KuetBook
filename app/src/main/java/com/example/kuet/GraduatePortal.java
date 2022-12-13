@@ -10,6 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 public class GraduatePortal extends AppCompatActivity {
 
     private WebView webView;
@@ -19,10 +21,13 @@ public class GraduatePortal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graduate_portal);
 
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         CustomWebViewClientaehGP client=new CustomWebViewClientaehGP(this);
         webView = findViewById(R.id.webView);
         webView.setWebViewClient(client);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setSupportZoom(true);
         webView.loadUrl("https://graduate.kuet.ac.bd/");
     }
 

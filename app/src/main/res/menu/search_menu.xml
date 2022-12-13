@@ -4,10 +4,10 @@
 
     <!--creating an item for our search view-->
     <item
-        android:id="@+id/app_bar_search"
-        android:icon="@drawable/ic_account"
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_baseline_search_24"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>

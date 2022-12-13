@@ -10,6 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 public class VehicleRequisitionSystem extends AppCompatActivity {
 
     private WebView webView;
@@ -18,6 +20,8 @@ public class VehicleRequisitionSystem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_requisition_system);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         CustomWebViewClientaehVRS client=new CustomWebViewClientaehVRS(this);
         webView = findViewById(R.id.webView);

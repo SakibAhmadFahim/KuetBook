@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_4"
     android:orientation="vertical"
-    tools:context=".Department">
+    tools:context=".HomeActivity.Department">
 
     <ExpandableListView
         android:id="@+id/expandableListView"

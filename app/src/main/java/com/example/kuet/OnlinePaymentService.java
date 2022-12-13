@@ -10,6 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 public class OnlinePaymentService extends AppCompatActivity {
 
     private WebView webView;
@@ -19,10 +21,13 @@ public class OnlinePaymentService extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_payment_service);
 
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         CustomWebViewClientaehOPS client=new CustomWebViewClientaehOPS(this);
         webView = findViewById(R.id.webView);
         webView.setWebViewClient(client);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setSupportZoom(true);
         webView.loadUrl("https://payment.kuet.ac.bd/payment/");
     }
 

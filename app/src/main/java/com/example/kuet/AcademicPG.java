@@ -10,6 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 public class AcademicPG extends AppCompatActivity {
 
     private WebView webView;
@@ -18,6 +20,8 @@ public class AcademicPG extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_academic_pg);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         CustomWebViewClientaehAPG client=new CustomWebViewClientaehAPG(this);
         webView = findViewById(R.id.webView);

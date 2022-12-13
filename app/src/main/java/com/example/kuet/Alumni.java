@@ -10,6 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import java.util.Objects;
+
 public class Alumni extends AppCompatActivity {
 
     private WebView webView;
@@ -18,6 +20,8 @@ public class Alumni extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumni);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         CustomWebViewClientaehAlumni client=new CustomWebViewClientaehAlumni(this);
         webView = findViewById(R.id.webView);

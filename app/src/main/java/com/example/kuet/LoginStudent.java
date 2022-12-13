@@ -4,10 +4,13 @@ import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
@@ -27,6 +30,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.kuet.HomeActivity.HomeActivityStudent;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -57,6 +61,8 @@ public class LoginStudent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_student);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Sign In");
 
         rgstr=findViewById(R.id.register);
         Email = findViewById(R.id.tmail);
@@ -100,11 +106,22 @@ public class LoginStudent extends AppCompatActivity {
             if(EmailTxt.isEmpty()){
                 Toast.makeText(LoginStudent.this,"Please enter your email address",Toast.LENGTH_SHORT).show();
             }
-
             else if(PasswordTxt.isEmpty()){
                 Toast.makeText(LoginStudent.this,"Please enter your password",Toast.LENGTH_SHORT).show();
             }
-            else{
+            else {
+                if(isNetworkAvailable())
+                {
+                    new AlertDialog.Builder(LoginStudent.this)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Internet Connection Alert")
+                            .setMessage("Please Check Your Internet Connection")
+                            .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                            .create().show();
+
+                }
+
+                else{
                 mAuth = FirebaseAuth.getInstance();
                 mAuth.signInWithEmailAndPassword(EmailTxt,PasswordTxt).addOnCompleteListener(task -> {
                     if (task.isSuccessful()){
@@ -115,7 +132,7 @@ public class LoginStudent extends AppCompatActivity {
                         if(firebaseUser.isEmailVerified()){
 
 
-                                    Intent intent=new Intent(LoginStudent.this,HomeActivityStudent.class);
+                                    Intent intent=new Intent(LoginStudent.this, HomeActivityStudent.class);
 
                                     Toast.makeText(LoginStudent.this, "User logged in successfully", Toast.LENGTH_SHORT).show();
                                         //startActivity(new Intent(LoginStudent.this, HomeActivityStudent.class));
@@ -128,12 +145,13 @@ public class LoginStudent extends AppCompatActivity {
                             showAlertDialog();
                         }
                     }else{
-                        Toast.makeText(LoginStudent.this, "Log in Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Email or Password is invalid", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginStudent.this, "Log in Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
-        });
+        }});
 
         rememberme.setOnCheckedChangeListener((compoundButton, b) -> {
             if(compoundButton.isChecked()){
@@ -141,14 +159,14 @@ public class LoginStudent extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("remember","true");
                 editor.apply();
-                Toast.makeText(LoginStudent.this,"Checked",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginStudent.this,"Checked",Toast.LENGTH_SHORT).show();
             }
             else if(compoundButton.isChecked()){
                 SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("remember","false");
                 editor.apply();
-                Toast.makeText(LoginStudent.this,"UnChecked",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginStudent.this,"UnChecked",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -158,16 +176,26 @@ public class LoginStudent extends AppCompatActivity {
             finish();
         });
 
-        mGoogleLoginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+       // mGoogleLoginbtn.setOnClickListener(v -> resultLauncher.launch(new Intent(mGoogleSignInClient.getSignInIntent())));
+
+        mGoogleLoginbtn.setOnClickListener(v -> {
+
+            if(isNetworkAvailable())
+            {
+                new AlertDialog.Builder(LoginStudent.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Internet Connection Alert")
+                        .setMessage("Please Check Your Internet Connection")
+                        .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                        .create().show();
+
+            }
+            else
+            {
                 resultLauncher.launch(new Intent(mGoogleSignInClient.getSignInIntent()));
             }
+
         });
-
-
-
-
 
         rgstr.setPaintFlags(rgstr.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
@@ -256,27 +284,24 @@ public class LoginStudent extends AppCompatActivity {
             startActivity(new Intent(LoginStudent.this, HomeActivityStudent.class));
             finish();
       }
-        else{
-            Toast.makeText(LoginStudent.this,"Please Sign In",Toast.LENGTH_SHORT).show();
-       }
+        /*else{
+            //Toast.makeText(LoginStudent.this,"Please Sign In",Toast.LENGTH_SHORT).show();
+       }*/
   }
 
-    ActivityResultLauncher<Intent>resultLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result){
+    ActivityResultLauncher<Intent>resultLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
 
-            if(result.getResultCode() == Activity.RESULT_OK){
-                Intent intent = result.getData();
-                Task<GoogleSignInAccount>task=GoogleSignIn.getSignedInAccountFromIntent(intent);
+        if(result.getResultCode() == Activity.RESULT_OK){
+            Intent intent = result.getData();
+            Task<GoogleSignInAccount>task=GoogleSignIn.getSignedInAccountFromIntent(intent);
 
-                try{
-                    GoogleSignInAccount account = task.getResult(ApiException.class);
-                    assert account!= null;
-                    firebaseAuthWithGoogle(account);
+            try{
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                assert account!= null;
+                firebaseAuthWithGoogle(account);
 
-                } catch (ApiException e) {
-                    Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                }
+            } catch (ApiException e) {
+                Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
             }
         }
     });
@@ -300,10 +325,34 @@ public class LoginStudent extends AppCompatActivity {
                     } else {
                         FirebaseUser user=mAuth.getCurrentUser();
                         assert user != null;
-                        Toast.makeText(LoginStudent.this,""+user.getEmail(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginStudent.this,""+user.getEmail(),Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginStudent.this, HomeActivityStudent.class));
                         finish();
                     }
                 }).addOnFailureListener(e -> Toast.makeText(LoginStudent.this,""+e.getMessage(),Toast.LENGTH_SHORT).show());
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager != null) {
+
+
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+
+                        return false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+
+                        return false;
+                    } else return !capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET);
+                }
+            }
+        }
+
+        return true;
+
     }
 }
